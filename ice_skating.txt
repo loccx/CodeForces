@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+const int MAXN = 1000;
+
+vector<int> graph[MAXN+1];
+bool visited[MAXN+1];
+
+void dfs(int v) {
+    visited[v] = true;
+    for (int u : graph[v]) {
+        if (!visited[u]) {
+            dfs(u);
+        }
+    }
+}
+
+int main() {
+    int node_count;
+    cin >> node_count;
+
+    // Build graph
+    for (int i = 1; i <= node_count; i++) {
+        int xi, yi;
+        cin >> xi >> yi;
+
+        for (int j = 1; j < i; j++) {
+            int xj, yj;
+            cin >> xj >> yj;
+
+            if (xi == xj || yi == yj) { // Can move from i to j
+                graph[i].push_back(j);
+                graph[j].push_back(i);
+            }
+        }
+    }
+
+    // Find connected components
+    int num_components = 0;
+    for (int i = 1; i <= node_count; i++) {
+        if (!visited[i]) {
+            dfs(i);
+            num_components++;
+        }
+    }
+
+    // Output result
+    cout << max(num_components - 1, 0) << endl;
+
+    return 0;
+}
