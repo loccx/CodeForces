@@ -1,0 +1,8 @@
+C COMPILING/EXECUTION
+m='make -f MakefileC'
+
+C++ COMPILING/EXECUTION
+mp='make -f MakefileCPP'
+
+TESTING FILE
+t='vim -O ~/Documents/CODE/vim/COMP/TEST/t.c ~/Documents/CODE/vim/COMP/TEST/input.in'
